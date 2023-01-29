@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
+    "firebase": "^9.16.0",
     "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -11,6 +12,7 @@
     "react-router-dom": "^5.3.4",
     "react-router-hash-link": "^2.4.3",
     "react-scripts": "^5.0.1",
+    "reactstrap": "^9.1.5",
     "sass": "^1.49.7"
   },
   "repository": {

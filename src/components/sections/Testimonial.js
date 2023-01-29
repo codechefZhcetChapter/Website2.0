@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import classNames from 'classnames';
 import { SectionTilesProps } from '../../utils/SectionProps';
 import SectionHeader from './partials/SectionHeader';
+import {  collection, getDocs } from "firebase/firestore"; 
+import { db } from '../../views/Firebase';
 
 const propTypes = {
   ...SectionTilesProps.types
@@ -22,6 +24,47 @@ const Testimonial = ({
   pushLeft,
   ...props
 }) => {
+
+
+  const [team,setTeam]=useState([])
+  const fetchTeam=async()=>{
+    const querySnapshot = await getDocs(collection(db, "Team-2023"))
+    
+   
+    //doc is document of collection and doc.data() is object in that doc. In book, all objects have been passed with index 0,1..
+// querySnapshot is an is an array object of docs.
+
+const data= querySnapshot.docs.map((doc)=>({...doc.data(),}));
+data.sort((a, b) => {
+  const rankA = getRank(a.role);
+  const rankB = getRank(b.role);
+  return rankA - rankB;
+});
+setTeam(data);
+  }
+
+
+useEffect(()=>{
+  fetchTeam()
+}, [])
+
+
+const getRank = (role) => {
+  switch (role) {
+    case "Mentor":
+      return 1;
+    case "President":
+      return 2;
+    case "Developer":
+      return 3;
+    // Add more cases for different professions
+    default:
+      return 0;
+  }
+};
+
+
+
 
   const outerClasses = classNames(
     'testimonial section',
@@ -58,71 +101,29 @@ const Testimonial = ({
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content" />
           <div className={tilesClasses}>
-
-            <div className="tiles-item reveal-from-right" data-reveal-delay="200">
+{team.map((item,index)=>{
+  return(
+            <div className="tiles-item " id={index} >
               <div className="tiles-item-inner">
                 <div className="testimonial-item-content">
-                  <img src={require("../../assets/images/Team/maaz.jpg") }/>
+                  <img src={item.imgLink}/>
                 </div>
                 <div className="testimonial-item-footer text-xs mt-32 mb-0 has-top-divider">
-                  <span className="testimonial-item-name text-color-high">Maaz Bin Asad</span>
+                  <span className="testimonial-item-name text-color-high">{item.name}</span>
                   <span className="text-color-low"> / </span>
                   <span className="testimonial-item-link">
-                    <a href="#0">Mentor</a>
+                    <a href="#0">{item.role}</a>
                   </span>
                 </div>
               </div>
             </div>
-
-            <div className="tiles-item reveal-from-bottom">
-              <div className="tiles-item-inner">
-                <div className="testimonial-item-content">
-                <img src={require("../../assets/images/Team/apoorve.jpg") }/>
-                </div>
-                <div className="testimonial-item-footer text-xs mt-32 mb-0 has-top-divider">
-                  <span className="testimonial-item-name text-color-high">Apoorve Goel</span>
-                  <span className="text-color-low"> / </span>
-                  <span className="testimonial-item-link">
-                    <a href="#0">Mentor</a>
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="tiles-item reveal-from-left" data-reveal-delay="200">
-              <div className="tiles-item-inner">
-                <div className="testimonial-item-content">
-                <img src={require("../../assets/images/Team/sanjana.jpg") }/>
-                </div>
-                <div className="testimonial-item-footer text-xs mt-32 mb-0 has-top-divider">
-                  <span className="testimonial-item-name text-color-high">Sanjana Maheshwari</span>
-                  <span className="text-color-low"> / </span>
-                  <span className="testimonial-item-link">
-                    <a href="#0">Mentor</a>
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* <div className="tiles-item reveal-from-left" data-reveal-delay="200">
-              <div className="tiles-item-inner">
-                <div className="testimonial-item-content">
-                <img src={require("../../assets/images/Team/sanjana.jpg") }/>
-                </div>
-                <div className="testimonial-item-footer text-xs mt-32 mb-0 has-top-divider">
-                  <span className="testimonial-item-name text-color-high">Ben Stafford</span>
-                  <span className="text-color-low"> / </span>
-                  <span className="testimonial-item-link">
-                    <a href="#0">AppName</a>
-                  </span>
-                </div>
-              </div>
-            </div> */}
-
+  )
+})}
           </div>
         </div>
       </div>
     </section>
+    
   );
 }
 
