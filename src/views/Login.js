@@ -32,15 +32,20 @@ const Login = () => {
    setPhoto(e.target.files[0])
   }
 
+const [loading, setLoading]= useState(false)
+
   const handleSubmit = async(e) => {
     e.preventDefault();
-
+    setLoading(true)
     const newId = doc(collection(db,"Team-2023")).id;
-    await setDoc(doc(db, "Team-2023",newId), formData);  
+    setDoc(doc(db, "Team-2023",newId), formData).then(()=>{
+      alert("Submitted!!!")
+    });  
 
  const imageRef= ref(storage, `team-images/${photo.name}`)//making reference
 uploadBytes(imageRef, photo).then(()=>{//uploading
- alert("Submitted!!!")
+ 
+
 })
   }
 
@@ -154,9 +159,10 @@ uploadBytes(imageRef, photo).then(()=>{//uploading
 
 
                 <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Submit" onClick={handleSubmit}/>
+                {loading?(<div>hi</div>):(
+                  <input type="submit" name="submit" value="Submit" onClick={handleSubmit}/>)}
                 </div>
-                
+
               </form>
             </div>
           </div>
