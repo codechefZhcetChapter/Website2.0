@@ -98,7 +98,7 @@ uploadBytes(imageRef, photo).then(()=>{//uploading
               <form id="stripe-login">
                 <div class="field padding-bottom--24">
                   <label for="name">Name</label>
-                  <input type="text" id='name' name="name" onChange={handleChange}/>
+                  <input type="text" id='name' name="name" onChange={handleChange} required/>
                 </div>
 
 
@@ -106,7 +106,7 @@ uploadBytes(imageRef, photo).then(()=>{//uploading
                   <div class="grid--50-50">
                     <label for="email">Email</label>  
                   </div>
-                  <input type="email" id='email' name="email" onChange={handleChange}/>
+                  <input type="email" id='email' name="email" onChange={handleChange} required/>
                 </div>
 
 
@@ -132,7 +132,7 @@ uploadBytes(imageRef, photo).then(()=>{//uploading
                   <div class="grid--50-50">
                     <label for="role">Your Position</label>  
                   </div>
-                  <Input type="select" name="role" id="role" onChange={handleChange}>
+                  <Input type="select" name="role" id="role" onChange={handleChange} required>
           <option>Select</option>
           <option>Mentor</option>
           <option>President</option>
@@ -159,8 +159,8 @@ uploadBytes(imageRef, photo).then(()=>{//uploading
 
 
                 <div class="field padding-bottom--24">
-                {loading?(<div>hi</div>):(
-                  <input type="submit" name="submit" value="Submit" onClick={handleSubmit}/>)}
+               
+                  <input type="submit" name="submit" value="Submit" onClick={handleSubmit}/>
                 </div>
 
               </form>
