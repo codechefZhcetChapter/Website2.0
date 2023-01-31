@@ -55,9 +55,22 @@ const getRank = (role) => {
       return 1;
     case "President":
       return 2;
-    case "Developer":
+    case "CP Lead":
       return 3;
-    // Add more cases for different professions
+    case "Manager":
+      return 4;
+    case "Event Coordinator":
+      return 5;
+    case "Web Developer":
+      return 6;
+    case "Outreach Media Lead":
+      return 7;
+    case "CP Team Member":
+      return 8;
+    case "Social Media Team":
+      return 9;
+    case "Volunteer":
+      return 10;
     default:
       return 0;
   }
@@ -101,9 +114,9 @@ const getRank = (role) => {
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content" />
           <div className={tilesClasses}>
-{team.map((item,index)=>{
+{team.slice(0,3).map((item,index)=>{
   return(
-            <div className="tiles-item " id={index} >
+            <div className="tiles-item " key={index} >
               <div className="tiles-item-inner">
                 <div className="testimonial-item-content">
                   <img src={item.imgLink}/>
