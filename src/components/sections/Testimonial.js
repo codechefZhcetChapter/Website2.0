@@ -125,7 +125,7 @@ const getRank = (role) => {
                   <span className="testimonial-item-name text-color-high">{item.name}</span>
                   <span className="text-color-low"> / </span>
                   <span className="testimonial-item-link">
-                    <a href="#0">{item.role}</a>
+                    <a>{item.role}</a>
                   </span>
                 </div>
               </div>
