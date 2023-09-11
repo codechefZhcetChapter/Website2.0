@@ -28,7 +28,7 @@ const Testimonial = ({
 
   const [team,setTeam]=useState([])
   const fetchTeam=async()=>{
-    const querySnapshot = await getDocs(collection(db, "Team-2023"))
+    const querySnapshot = await getDocs(collection(db, "Team-2024"))
     
    
     //doc is document of collection and doc.data() is object in that doc. In book, all objects have been passed with index 0,1..
@@ -57,7 +57,7 @@ const getRank = (role) => {
       return 2;
     case "CP Lead":
       return 3;
-    case "Manager":
+    case "Management Lead":
       return 4;
     case "Event Coordinator":
       return 5;
