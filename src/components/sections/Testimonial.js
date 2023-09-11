@@ -114,7 +114,7 @@ const getRank = (role) => {
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content" />
           <div className={tilesClasses}>
-{team.slice(0,7).map((item,index)=>{
+{team.slice(0,30).map((item,index)=>{
   return(
             <div className="tiles-item " key={index} >
               <div className="tiles-item-inner">
